@@ -16,7 +16,13 @@ userInterface.prompt();
 userInterface.on("line", async (input) => {
   const res = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-0613",
-    messages: [{ role: "user", content: input }],
+    messages: [
+      { role: "user", content: input },
+      {
+        role: "system",
+        content: "You are an expert in tennis, tennis rackets and tennis strings, you will ask the client what type of game he or she has and depending on the answer you will advice wich racket, string, and string tension he or she should use and why."
+      }
+    ],
   });
   console.log(res.choices[0].message.content);
   userInterface.prompt();
